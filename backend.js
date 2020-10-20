@@ -27,7 +27,7 @@ mongoose
   .then(() => app.listen(PORT, () => console.log(`server running on ${PORT}`)))
   .catch((error) => console.log(error));
 
-const publicPath = path.join(__dirname, 'build');
+const publicPath = path.join(__dirname, 'public');
 app.use(express.static(publicPath));
 app.use(express.json());
 app.use(fileUpload({ createParentPath: true }));
