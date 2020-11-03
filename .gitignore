@@ -4,6 +4,8 @@
 /build
 /node_modules
 /public
+/dist
 
 # individual files
 nodemon.json
+database.js

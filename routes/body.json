@@ -1,0 +1,26 @@
+{
+  "_id": 1,
+  "title": "Lot For Sale",
+  "seo": "lot For sale",
+  "property": "House and Lot",
+  "marketing": "For Sale",
+  "price": "1,000,000",
+  "status": "Pre-Selling",
+  "typeOfDelivery": "finished",
+  "typeOfHouse": "Town House",
+  "buildingHeights": "2",
+  "lotSize": "169 sqm",
+  "bedroom": "4",
+  "bathroom": "2",
+  "parking": "yes",
+  "typeOfParking": "garage",
+  "features": ["flat terrain"],
+  "ammenities": ["basketball court"],
+  "address": {
+    "Country": "Philippines",
+    "Province": "Cebu",
+    "City": "Lapu-Lapu City",
+    "Street": "Basak"
+  },
+  "jsRaw": {}
+}

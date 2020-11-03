@@ -1,0 +1,39 @@
+POST http://localhost:5000/submitlisting/savedproperty HTTP/1.1
+Content-Type: application/json
+Accept-Charset: UTF-8
+
+{ 
+  "id": "5f9cf39cf8fdbb169c89f18a",
+  "title": "Lot For Sale",
+  "seo": "lot For sale",
+  "property": "House and Lot",
+  "marketing": "My property is for sale",
+  "price": "1,000,000",
+  "status": "Pre-selling",
+  "typeOfDelivery": "finished",
+  "typeOfHouse": "Townhouse",
+  "buildingHeights": "2",
+  "lotSize": "560 sqm",
+  "bedroom": "4",
+  "bathroom": "2",
+  "parking": "yes",
+  "typeOfParking": "garage",
+  "features": ["flat terrain"],
+  "ammenities": ["basketball court"],
+  "address": {
+    "country": "Philippines",
+    "province": "Cebu",
+    "city": "Lapu-Lapu City",
+    "street": "Basak"
+  }
+}
+
+###
+
+POST http://localhost:5000/submitlisting/uploadimage HTTP/1.1
+Content-Type: multipart/form-data
+Accept-Charset: UTF-8
+
+{
+  "images": ["images1.png", "images2.png"]
+}
