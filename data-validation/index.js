@@ -1,7 +1,7 @@
 const { Estate } = require('../models/submitlisting');
 require('../util');
 
-function validateData(data) {
+function validateProperties(data) {
   const { id, ...rest } = data;
   const unrecognizedKeys = Object.keys(rest).reduce((acc, curr) => {
     const search = Object.keys(Estate.schema.obj).find(prop => prop === curr);
@@ -20,4 +20,4 @@ function validateData(data) {
   });
 }
 
-module.exports = validateData;
+module.exports = { properties: validateProperties };

@@ -50,7 +50,12 @@ const ARRAY_STRING = {
 const imageSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   imageUrls: {
-    type: [{}],
+    type: [
+      {
+        url: SIMPLE_STRING,
+        name: SIMPLE_STRING,
+      },
+    ],
     default: undefined,
   },
 });
@@ -90,11 +95,15 @@ const estateSchema = new Schema(
     features: ARRAY_STRING,
     ammenities: ARRAY_STRING,
     address: {
-      country: SIMPLE_STRING,
-      province: SIMPLE_STRING,
-      city: SIMPLE_STRING,
-      street: SIMPLE_STRING,
+      type: {
+        country: SIMPLE_STRING,
+        province: SIMPLE_STRING,
+        city: SIMPLE_STRING,
+        street: SIMPLE_STRING,
+      },
+      default: undefined,
     },
+    // important!! : validation of jsRaw is not yet implemented
     jsRaw: {},
   },
   { timestamps: true }

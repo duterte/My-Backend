@@ -55,7 +55,7 @@ router.post('/savedproperty', async (req, res) => {
       // validates the request body and returns a promise
       // if request body contains unrecognized data
       // promise will be rejected else it will be resolved
-      await validate(body);
+      await validate.properties(body);
       const estate = await Estate.findById(body.id);
       estate.overwrite(body);
       await estate.save();
@@ -73,7 +73,9 @@ router.post('/savedproperty', async (req, res) => {
     // validates the request body and returns a promise
     // if request body contains unrecognized data
     // promise will be rejected else it will be resolved
-    validate(body)
+    console.log(validate);
+    validate
+      .properties(body)
       .then(data => {
         new Estate({
           _id: new moongose.Types.ObjectId(),
@@ -147,8 +149,8 @@ router.post('/uploadimage', async (req, res) => {
       const fileName = `IMG_${num}.${ext}`;
       fileImages[prop] = {
         save: files[prop].mv,
-        url: `dist/images/${userName}/${fileName}`,
-        path: `./dist/images/${userName}/${fileName}`,
+        url: `images/${userName}/${fileName}`,
+        path: `./images/${userName}/${fileName}`,
         name: files[prop].name.split('.')[0],
       };
     } else {
@@ -156,16 +158,36 @@ router.post('/uploadimage', async (req, res) => {
       return res.status(400).json({ message: 'Bad Request' });
     }
   }
+  const imgObj = Object.values(fileImages).map(({ url, name }) => ({
+    url,
+    name,
+  }));
 
   if (body.id) {
     // To do if request body has id
+    console.log('imgObj'.info, imgObj);
+
+    try {
+      const image = await Image.findById(body.id);
+      image._id = body.id;
+      image.imageUrls = [...image.imageUrls, ...imgObj];
+      const save = await image.save();
+      console.log('document'.info, save);
+      for (const prop in fileImages) {
+        fileImages[prop].save(path.join(fileImages[prop].path));
+      }
+      return res.status(202).json({
+        id: save._id,
+        images: imgObj,
+        message: 'Uploaded Successfully',
+      });
+    } catch (err) {
+      console.log(`${err.name} ${err.message}`);
+      return res.status(500).json('Testing Purposes failed');
+    }
   } else {
     // To do if request body has no id
 
-    const imgObj = Object.values(fileImages).map(({ url, name }) => ({
-      url,
-      name,
-    }));
     console.log('imgObj'.info, imgObj);
     try {
       const image = await new Image({
@@ -174,10 +196,10 @@ router.post('/uploadimage', async (req, res) => {
       });
       const save = await image.save();
       console.log('document'.info, save);
+
       for (const prop in fileImages) {
         fileImages[prop].save(path.join(fileImages[prop].path));
       }
-
       return res.status(202).json({
         id: save._id,
         images: save.imageUrls,
@@ -188,83 +210,7 @@ router.post('/uploadimage', async (req, res) => {
       return res.status(500).json('Testing Purposes failed');
     }
   }
-
   return res.status(500).json({ message: 'End point reach' });
 });
 
 module.exports = router;
-
-// const extensions = ['png', 'jpg', 'jpeg'];
-// let acceptedFiles = [];
-// let rejectedFiles = [];
-// let acceptedFilePath = [];
-// for (const i in files) {
-//   let mimeType = files[i].mimetype.split('/')[0];
-//   let split = files[i].name.split('.');
-//   let fileExt = split[split.length - 1];
-//   let allowed = extensions.find(extension => extension === fileExt);
-//   if (mimeType === 'image' && allowed) {
-//     acceptedFiles = [...acceptedFiles, files[i]];
-//     acceptedFilePath = [
-//       ...acceptedFilePath,
-//       { path: `images/${files[i].name}` },
-//     ];
-//   } else {
-//     rejectedFiles = [...rejectedFiles, files[i]];
-//   }
-// }
-
-// function moveFile() {
-//   for (const file of acceptedFiles) {
-//     file.mv(path.join(PUBLICIMAGE, file.name));
-//   }
-// }
-
-// function respond(images, _id) {
-//   return res.status(201).json({
-//     uploaded: images,
-//     id: _id,
-//     rejected: rejectedFiles.length ? rejectedFiles : undefined,
-//     message: 'Uploaded Successfully',
-//   });
-// }
-
-// const id = body.id;
-// if (id) {
-//   // update image then return back the id
-//   const estate = await Image.findOne({ _id: id });
-//   console.log(estate);
-//   const update = { images: [...estate.images, ...acceptedFilePath] };
-//   Image.findOneAndUpdate({ _id: id }, update, { new: true }, callback);
-//   function callback(err, result) {
-//     if (result) {
-//       console.log(result);
-//       moveFile();
-//       respond(acceptedFilePath, result.id);
-//     } else {
-//       console.debug('error', err);
-//       res
-//         .status(500)
-//         .json({ message: '1 Something went wrong from our end.' });
-//     }
-//   }
-// } else {
-//   // upload image then send id
-//   new Image({
-//     _id: new moongose.Types.ObjectId(),
-//     images: acceptedFilePath,
-//   })
-//     .save()
-//     .then(result => {
-//       const { images, _id } = result;
-//       console.log(result);
-//       moveFile();
-//       respond(images, _id);
-//     })
-//     .catch(err => {
-//       console.debug('error', err);
-//       res
-//         .status(500)
-//         .json({ message: '2 Something went wrong from our end.' });
-//     });
-// }

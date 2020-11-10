@@ -4,4 +4,5 @@ module.exports = colors.setTheme({
   info: 'yellow',
   success: 'green',
   error: 'red',
+  disregard: 'grey',
 });
