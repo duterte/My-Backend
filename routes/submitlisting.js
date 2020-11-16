@@ -37,84 +37,17 @@ router.get('/api/:id', async (req, res) => {
 // Post Routes
 
 router.post('/savedproperty', async (req, res) => {
-  const { body, headers } = req;
-  console.log('request received'.info, body);
-
-  if (Object.keys(body).length === 0) {
-    // Bad request if body has no content
-    return res.status(400).json({ message: 'Bad Request' });
-  }
-  if (moongose.connection.readyState === 0) {
-    // Internal Server error if db connection is null
-    return res
-      .status(500)
-      .json({ message: 'Server lost connection with database' });
-  }
-  if (body.id) {
-    try {
-      // validates the request body and returns a promise
-      // if request body contains unrecognized data
-      // promise will be rejected else it will be resolved
-      await validate.properties(body);
-      const estate = await Estate.findById(body.id);
-      estate.overwrite(body);
-      await estate.save();
-      return res.status(202).json({
-        ...body,
-        message: 'Successfully saved document',
-      });
-    } catch (err) {
-      console.log(`${err.name} ${err.message}`.info);
-      return res
-        .status(202)
-        .json({ message: 'Failed to saved try again later' });
-    }
-  } else {
-    // validates the request body and returns a promise
-    // if request body contains unrecognized data
-    // promise will be rejected else it will be resolved
-    console.log(validate);
-    validate
-      .properties(body)
-      .then(data => {
-        new Estate({
-          _id: new moongose.Types.ObjectId(),
-          ...data,
-        })
-          .save()
-          .then(documents => {
-            const { _id } = documents;
-            // console.log(rest);
-            return res
-              .status(201)
-              .json({ id: _id, ...data, message: 'Uploaded Successfully' });
-          })
-          .catch(err => {
-            const { name, message } = err;
-            console.log(`${name} ${message}`.error);
-            return res
-              .status(500)
-              .json({ message: 'Uploaded failed try again later' });
-          });
-      })
-      .catch(err => {
-        // Bad Request if body contains unrecognized data
-        const { name, message } = err;
-        console.log(`${name} ${message}`.error);
-        return res.status(400).json({ message: 'Bad Request' });
-      });
-  }
-});
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// for uploading image
-router.post('/uploadimage', async (req, res) => {
-  const { files, body } = req;
+  const { body, files } = req;
   const userName = 'admin';
+  const requestBodyLength = Object.keys(body).length;
+  const requestFilesLength = files ? Object.keys(files).length : 0;
+  const requestLength = requestBodyLength + requestFilesLength;
+  // console.log('request body'.info, body);
+  // console.log('request files'.info, files);
 
-  // check if body contain files
-  if (!files || Object.keys(files).length === 0) {
-    // response bad request of body contains no files
-    return res.status(400).json({ message: 'Bad request' });
+  if (requestLength === 0) {
+    // Bad request if body has no content
+    return res.status(400).json({ message: 'Request Body is empty' });
   }
 
   if (moongose.connection.readyState === 0) {
@@ -123,94 +56,80 @@ router.post('/uploadimage', async (req, res) => {
       .status(500)
       .json({ message: 'Server lost connection with database' });
   }
-
-  // Code below for in loop used to test the eligibility of all files
-  // It's all or nothing operation if any of the file doesn't passed the test
-  // will response 400 bad request and will not upload anyone of the file
-
-  // let fileImages = [];
-  // let filePath = [];
-
+  // Request file validation
   let fileImages = {};
-
-  for (const prop in files) {
-    // 97-122 charcode small case a -z
-    // String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1) + 97))
-    //
-    //
-    // only accept image file
-    const image = /^image$/gi.test(files[prop].mimetype.split('/')[0]);
-    // only accept .png and .jpeg file extension
-    const split = files[prop].name.split('.');
-    const ext = split[split.length - 1].match(/^png$|^jpe?g$/i);
-
-    if (ext && image) {
-      const num = Math.floor(Math.random() * 100 * Date.now());
-      const fileName = `IMG_${num}.${ext}`;
-      fileImages[prop] = {
-        save: files[prop].mv,
-        url: `images/${userName}/${fileName}`,
-        path: `./images/${userName}/${fileName}`,
-        name: files[prop].name.split('.')[0],
-      };
-    } else {
-      console.log(`${files[prop].name} is not a valid file`);
-      return res.status(400).json({ message: 'Bad Request' });
+  const allowedFileExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+  if (requestFilesLength > 0) {
+    for (const file in files) {
+      const imageName = files[file].name;
+      const splitName = imageName.split('.');
+      const fileExtension = splitName[splitName.length - 1];
+      const found = allowedFileExtensions.find(
+        extension => extension === fileExtension
+      );
+      if (found) {
+        const num = Math.floor(Math.random() * 100 * Date.now());
+        const fileName = `IMG_${num}.${fileExtension}`;
+        fileImages[file] = {
+          save: files[file].mv,
+          url: `images/${userName}/${fileName}`,
+          path: `./images/${userName}/${fileName}`,
+          name: files[file].name.split('.')[0],
+        };
+      } else {
+        console.log(`${files[file].name} is not a valid file`);
+        return res.status(400).json({ message: 'Invalid file' });
+      }
     }
   }
-  const imgObj = Object.values(fileImages).map(({ url, name }) => ({
+  // Request body validation
+  if (requestBodyLength > 0) {
+    try {
+      await validate.properties(body);
+    } catch (err) {
+      return res.status(400).json({ message: err.name });
+    }
+  }
+
+  const imageUrls = Object.values(fileImages).map(({ url, name }) => ({
     url,
     name,
   }));
 
-  if (body.id) {
-    // To do if request body has id
-    console.log('imgObj'.info, imgObj);
-
+  const data = imageUrls.length ? { ...body, imageUrls } : { ...body };
+  if (data.id) {
     try {
-      const image = await Image.findById(body.id);
-      image._id = body.id;
-      image.imageUrls = [...image.imageUrls, ...imgObj];
-      const save = await image.save();
-      console.log('document'.info, save);
-      for (const prop in fileImages) {
-        fileImages[prop].save(path.join(fileImages[prop].path));
+      const existingDocument = await Estate.findById(data.id);
+      existingDocument.overwrite(data);
+      const document = await existingDocument.save();
+      if (Object.keys(fileImages).length > 0) {
+        for (const img in fileImages) {
+          fileImages[img].save(path.join(fileImages[img].path));
+        }
       }
-      return res.status(202).json({
-        id: save._id,
-        images: imgObj,
-        message: 'Uploaded Successfully',
-      });
+      return res.status(202).json({ message: 'upload successfull' });
     } catch (err) {
-      console.log(`${err.name} ${err.message}`);
-      return res.status(500).json('Testing Purposes failed');
+      console.log('error: ', err.name);
+      return res.status(500).json({ message: 'Upload failed' });
     }
   } else {
-    // To do if request body has no id
-
-    console.log('imgObj'.info, imgObj);
     try {
-      const image = await new Image({
+      const estate = new Estate({
         _id: new moongose.Types.ObjectId(),
-        imageUrls: imgObj,
+        ...data,
       });
-      const save = await image.save();
-      console.log('document'.info, save);
-
-      for (const prop in fileImages) {
-        fileImages[prop].save(path.join(fileImages[prop].path));
+      const document = await estate.save();
+      if (Object.keys(fileImages).length > 0) {
+        for (const img in fileImages) {
+          fileImages[img].save(path.join(fileImages[img].path));
+        }
       }
-      return res.status(202).json({
-        id: save._id,
-        images: save.imageUrls,
-        message: 'Uploaded Successfully',
-      });
+      return res.status(202).json({ message: 'upload successfull' });
     } catch (err) {
-      console.log(`${err.name} ${err.message}`);
-      return res.status(500).json('Testing Purposes failed');
+      console.log('error: ', err);
+      return res.status(500).json({ message: 'Upload failed' });
     }
   }
-  return res.status(500).json({ message: 'End point reach' });
 });
 
 module.exports = router;

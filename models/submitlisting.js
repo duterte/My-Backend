@@ -104,6 +104,10 @@ const estateSchema = new Schema(
       default: undefined,
     },
     // important!! : validation of jsRaw is not yet implemented
+    imageUrls: {
+      type: [],
+      default: undefined,
+    },
     jsRaw: {},
   },
   { timestamps: true }

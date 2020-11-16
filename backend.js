@@ -130,7 +130,15 @@ app.use(express.static(publicPath));
 app.use('/images', express.static(imagesPath));
 
 app.use(express.json());
-app.use(fileUpload({ createParentPath: true }));
+app.use(
+  fileUpload({
+    createParentPath: true,
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+    safeFileNames: true,
+    preserveExtension: true,
+  })
+);
 app.use('/submitlisting', submitListingRoutes);
 app.get(match, (req, res) => res.sendFile(path.join(publicPath, ROOTFILE)));
 
