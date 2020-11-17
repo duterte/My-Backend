@@ -11,3 +11,4 @@
 # individual files
 nodemon.json
 database.js
+.env

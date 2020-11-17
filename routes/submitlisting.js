@@ -10,12 +10,8 @@ const validate = require('../data-validation');
 // utilities
 require('../util');
 
-// file path
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Get Routes
-
-const PUBLIC_FOLDER = './public';
-// const PUBLIC_FOLDER = path.join(ROOTPATH, 'images');
 
 router.get('/api/:id', async (req, res) => {
   try {

@@ -46,6 +46,7 @@ const CERT_FILE = 'cert.pem';
 
 // route imports
 const submitListingRoutes = require('./routes/submitlisting');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -139,7 +140,16 @@ app.use(
     preserveExtension: true,
   })
 );
+
+app.use(function (req, res, next) {
+  console.log('Request Received'.info);
+  console.log('Header: ', req.headers);
+  console.log('Body: ', req.body);
+  next();
+});
+
 app.use('/submitlisting', submitListingRoutes);
+app.use('/auth', auth);
 app.get(match, (req, res) => res.sendFile(path.join(publicPath, ROOTFILE)));
 
 // 404 file
