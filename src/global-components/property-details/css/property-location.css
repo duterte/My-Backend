@@ -1,0 +1,11 @@
+.property-location {
+  display: flex;
+  align-items: center;
+  color: #2b2e35;
+}
+
+.property-location > .location {
+  flex: 0 0 70px;
+  font-size: 1.8em;
+  color: #bac5d1;
+}

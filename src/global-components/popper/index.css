@@ -1,0 +1,91 @@
+#popper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  position: absolute;
+  top: 0;
+  /* bottom: 0; */
+  left: 0;
+  /* right: 0; */
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.delete-holder {
+  display: flex;
+  position: sticky;
+  grid-column: 1/5;
+  grid-row: 1/5;
+  justify-content: center;
+  align-items: center;
+  /* background-color: orange; */
+  top: 0;
+  height: 100vh;
+}
+
+.delete-confirmation {
+  border-radius: 5px;
+  background-color: #1b1919;
+  color: antiquewhite;
+  padding: 3em 2em 2em 2em;
+  pointer-events: auto;
+}
+
+.delete-confirmation .btns,
+.delete-confirmation > label {
+  margin: 1.4em 0;
+}
+
+.delete-confirmation .confirmation {
+  margin-bottom: 2em;
+  font-size: 1.1em;
+  font-weight: bolder;
+  color: var(--bg-color-header);
+}
+
+.delete-confirmation .btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-confirmation > label > span {
+  margin-left: 1em;
+}
+
+.notification-holder {
+  display: flex;
+  /* display: none; */
+  position: sticky;
+  flex-direction: column;
+  /* background-color: green; */
+  grid-column: 4/5;
+  grid-row: 1/5;
+  justify-content: flex-end;
+  align-items: center;
+  top: 0;
+  height: 100vh;
+}
+
+.notification-holder .notification {
+  border-radius: 5px;
+  background-color: black;
+  color: antiquewhite;
+  width: max-content;
+  padding: 1em 2em;
+  position: sticky;
+  margin: 0.1em 0;
+  pointer-events: auto;
+}
+
+.notification-holder .notification:last-of-type {
+  margin-bottom: 2em;
+}
+
+/* @media screen and (min-width: 425px) {
+  .delete-confirmation {
+    width: max-content;
+    transform: translate(-50%, -50%);
+  }
+} */

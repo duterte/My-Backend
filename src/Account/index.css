@@ -1,0 +1,79 @@
+.profile-box > figure {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profile-box > figure > img {
+  width: 80%;
+  max-width: 190px;
+  border-radius: 50%;
+  box-sizing: content-box;
+  padding: 0.2em;
+  box-shadow: 0 0 5px #00000033;
+  margin: 1em 0;
+}
+
+.profile-box > figure > span {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2em;
+  font-weight: bolder;
+}
+
+.profile-box > div {
+  display: flex;
+  margin: 0 0.5em 1em 0.5em;
+}
+
+.profile-box > hr {
+  margin: 0 0.5em 1em 0.5em;
+}
+
+.profile-box > h4 {
+  margin: 0 0 1em 0.5em;
+}
+
+.profile-box > p {
+  margin: 0 0.5em 1em 0.5em;
+  text-indent: 6em;
+}
+
+.profile-box > .space {
+  justify-content: space-between;
+}
+
+.profile-box > .space > b {
+  font-weight: bolder;
+}
+
+.profile-box > .center {
+  justify-content: center;
+}
+
+@media (min-width: 788px) {
+  .user-dashboard > .stab-content {
+    width: max-content;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1288px) {
+  main.user-dashboard {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    max-width: 1365px;
+    margin: 2em auto 2em auto;
+  }
+  .profile-box {
+    max-width: 500px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 0 2em;
+    position: sticky;
+    top: 25px;
+  }
+  main.user-dashboard .stab:last-of-type {
+    margin-bottom: 0;
+  }
+}

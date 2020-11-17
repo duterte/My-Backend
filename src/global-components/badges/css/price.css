@@ -1,0 +1,14 @@
+.property-price {
+  display: flex;
+  margin-left: 1em;
+}
+
+.property-price > span {
+  display: flex;
+  align-items: center;
+  background: orangered;
+  padding: 0 0.5em;
+  height: 30px;
+  font-weight: bolder;
+  color: #f1dada;
+}

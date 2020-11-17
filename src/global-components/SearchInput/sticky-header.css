@@ -1,0 +1,46 @@
+.sticky-header {
+  /* box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1); */
+  border: 1px solid white;
+  background-color: white;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+  transition: top 1s ease-in-out;
+}
+
+.sticky-header.sticky {
+  top: -65px;
+}
+
+.sticky-header > #search-wrapper {
+  margin: 1em auto;
+}
+
+.sticky-header > .plugin {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.sticky-header > .plugin > * {
+  outline: none;
+  border: none;
+  background: inherit;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.sticky-header > .plugin > :first-child {
+  margin-left: 2em;
+}
+
+.sticky-header > .plugin > :last-child {
+  margin-right: 2em;
+}
+
+@media (min-width: 650px) {
+  .sticky-header > .plugin {
+    width: 629px;
+    margin: 0 auto 1em auto;
+  }
+}

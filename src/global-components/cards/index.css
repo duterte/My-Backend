@@ -1,0 +1,119 @@
+/* Cards CSS */
+
+.card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  width: 100%;
+  height: 472px;
+  background: #f3f7fb;
+  color: #f1dada;
+}
+
+.card-wrapper > figure {
+  grid-column: 1/13;
+  grid-row: 1/9;
+  overflow: hidden;
+}
+
+.card-wrapper > figure > img {
+  transition: width 2s, height 2s;
+}
+
+.card-wrapper > figure > .active {
+  width: 110%;
+  height: 110%;
+}
+
+.card-wrapper > .property-location {
+  grid-column: 1/13;
+  grid-row: 9/11;
+}
+
+.card-wrapper > .info-snippets {
+  grid-column: 1/13;
+  grid-row: 11/13;
+}
+
+.card-wrapper > .hfs-badges {
+  grid-column: 1/13;
+  grid-row: 1;
+}
+
+.card-wrapper > .property-price {
+  grid-column: 1/13;
+  grid-row: 8;
+}
+
+@media screen and (min-width: 386px) {
+  .card-wrapper {
+    width: 386px;
+  }
+}
+
+/* Stab CSS */
+
+.stab {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  margin-bottom: 2em;
+  background-color: var(--bg-color-gray);
+  max-width: 740px;
+  max-height: 341px;
+  overflow: hidden;
+}
+
+.stab > figure {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column: 1/2;
+  height: 40vmin;
+  max-height: 341px;
+  width: 40vmin;
+  overflow: hidden;
+}
+
+.stab > figure > img {
+  grid-column: 1/13;
+  grid-row: 1/13;
+  transition: width 2s, height 2s;
+}
+
+.stab > figure > .hfs-badges {
+  grid-column: 1/13;
+  grid-row: 1;
+  color: #f1dada;
+}
+
+.stab > figure {
+  font-size: 0.5em;
+}
+
+.stab > .details {
+  display: grid;
+  grid-column: 2/3;
+  font-size: 0.6em;
+}
+
+.stab > .details figure {
+  width: 30px;
+  height: 30px;
+}
+
+.stab > .details > .property-price {
+  align-items: center;
+}
+
+@media (min-width: 650px) {
+  .stab > figure,
+  .stab > .details {
+    font-size: 1em;
+  }
+
+  .stab > .details figure {
+    width: 50px;
+    height: 50px;
+  }
+}

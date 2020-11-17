@@ -1,0 +1,15 @@
+.hfs-badges > span {
+  position: relative;
+  top: 10px;
+  margin-left: 1em;
+  padding: 0.2em 0.5em;
+  font-weight: bolder;
+}
+
+.hfs-badges > .property {
+  background-color: #1a941a;
+}
+
+.hfs-badges > .marketing {
+  background-color: #da42da;
+}

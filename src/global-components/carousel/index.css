@@ -1,0 +1,177 @@
+.image-viewer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 464px;
+  background-color: lightgrey;
+}
+
+.image-viewer .panel {
+  display: grid;
+  z-index: 1;
+  height: 100%;
+  font-size: 4em;
+  cursor: pointer;
+  color: #ffffff80;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.image-viewer .left {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.image-viewer .panel:hover i {
+  display: block;
+}
+
+.image-viewer .left:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0.8186624991793592) 0%,
+    rgba(2, 0, 36, 0.40129555240064774) 32%,
+    rgba(2, 0, 36, 0) 100%
+  );
+  opacity: 1;
+}
+
+.image-viewer .left .icon {
+  display: none;
+  justify-self: start;
+  align-self: center;
+}
+
+.image-viewer .slider {
+  grid-column: 1/5;
+  grid-row: 1/2;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.image-viewer .images {
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+.image-viewer .picture {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(18, 1fr);
+  flex: 1 0 680px;
+}
+
+.image-viewer img {
+  grid-column: 1/20;
+  grid-row: 1/20;
+}
+
+.image-viewer .caption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1/19;
+  grid-row: 17/ 19;
+}
+
+.image-viewer .caption span {
+  border-radius: 5px;
+  padding: 0.1em 1em;
+  background-color: black;
+  color: var(--bg-color-header);
+}
+
+.image-viewer .right {
+  grid-column: 4/5;
+  grid-row: 1/2;
+}
+
+.image-viewer .right:hover {
+  background: linear-gradient(
+    270deg,
+    rgba(2, 0, 36, 0.8186624991793592) 0%,
+    rgba(2, 0, 36, 0.40129555240064774) 32%,
+    rgba(2, 0, 36, 0) 100%
+  );
+  opacity: 1;
+}
+
+.image-viewer .right .icon {
+  display: none;
+  justify-self: end;
+  align-self: center;
+}
+
+.image-viewer .image-overlay {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(18, 1fr);
+  grid-column: 1/5;
+  grid-row: 1/2;
+}
+
+.image-viewer .top-label {
+  grid-column: 1/19;
+  grid-row: 1/19;
+  /* z-index: 1; */
+}
+
+.top-label .label-holder {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1em;
+  pointer-events: none;
+}
+
+.image-viewer .property {
+  background-color: black;
+  border-radius: 5px;
+  align-self: center;
+  margin-left: 0.5em;
+  padding: 0.3em 0.7em;
+  color: white;
+  z-index: 1;
+}
+
+.image-viewer .image-util {
+  display: none;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: white;
+  color: #333;
+  opacity: 0;
+  width: 27px;
+  height: 27px;
+  z-index: 1;
+  transition: opacity 1s;
+}
+
+.image-viewer .expand {
+  grid-column: 16/19;
+  grid-row: 1/3;
+}
+
+.image-viewer .trash {
+  grid-column: 18/20;
+  grid-row: 1/3;
+}
+
+.image-viewer:hover .trash,
+.image-viewer:hover .expand {
+  display: flex;
+  opacity: 0.3;
+}
+
+.image-viewer .trash:hover,
+.image-viewer .expand:hover {
+  opacity: 1;
+}
+
+.image-viewer .trash.hide {
+  display: none;
+}

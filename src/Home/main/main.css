@@ -1,0 +1,184 @@
+main > .first {
+  box-shadow: 0 1px 15px rgb(0, 0, 0, 0.3);
+  background: white;
+  height: 60px;
+  overflow-x: hidden;
+}
+
+.first > .wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.wrapper > span {
+  border: 1px solid orange;
+  margin: 0 2em;
+  padding: 0.2em 1em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+main > .second {
+  display: grid;
+  grid-template-rows: 50px 120px;
+  margin-top: 5em;
+}
+
+.second > h3 {
+  color: #9e9e9e;
+}
+
+.second > h1 {
+  font-size: 2em;
+  color: #37474e;
+}
+
+.second .cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.second .cards > * {
+  margin-bottom: 4.5em;
+}
+
+main > .map-section {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  background: #aadaff url(../../resource-images/central-visayas-map.webp);
+  background-clip: content-box;
+  background-size: cover;
+  background-position: -251px center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 5.5em auto 0 auto;
+  max-width: 1351px;
+  height: 70vh;
+}
+
+.map-section > .map-underlay {
+  grid-column: 7/13;
+  grid-row: 1/13;
+  background-color: orange;
+}
+
+.map-section > #map {
+  grid-column: 1/13;
+  grid-row: 1/13;
+}
+
+main > .hotdeals {
+  margin: 10em auto 0 auto;
+  max-width: 1351px;
+}
+
+.hotdeals > h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', serif;
+  font-size: 2em;
+  color: #37474e;
+}
+
+.hotdeals > .content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 368px auto;
+  margin-top: 50px;
+  background: #f3f7fb;
+}
+
+.content > figure {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column: 1/2;
+  grid-row: 1/2;
+  overflow: hidden;
+}
+
+.content > figure > img {
+  grid-column: 1/13;
+  grid-row: 1/13;
+  transition: width 2s, height 2s;
+}
+
+.content > figure > .active {
+  width: 110%;
+  height: 110%;
+}
+
+.content > figure > .hfs-badges {
+  grid-column: 1/13;
+  grid-row: 1;
+  color: #f1dada;
+}
+
+.content > .details {
+  display: grid;
+  grid-template-rows: 69px 39px 63px 108px 84px auto;
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.hotdeals .property-price {
+  grid-row: 1/2;
+  align-self: center;
+}
+
+.hotdeals .details > h3 {
+  justify-self: left;
+  align-self: center;
+  grid-row: 2/3;
+  margin-left: 1em;
+  font-weight: bolder;
+  font-size: 1.1em;
+}
+
+.hotdeals .property-location {
+  grid-row: 3/4;
+  color: #6c7079;
+}
+
+.hotdeals .property-location span {
+  font-weight: bold;
+}
+
+.hotdeals .property-desc {
+  grid-row: 4/5;
+}
+
+.hotdeals .seller-profile {
+  grid-row: 5/6;
+}
+
+.hotdeals .info-snippets {
+  grid-row: 6/7;
+  padding: 1em 0;
+}
+
+main > .testimonials {
+  display: flex;
+  margin: 10em auto 0 auto;
+  background-color: gray;
+}
+.testimonials > .content {
+  width: 50%;
+}
+.testimonials > figure {
+  width: 50%;
+  height: 70vh;
+}
+
+@media (min-width: 600px) {
+  .hotdeals > .content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .content > .details {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+}

@@ -1,0 +1,25 @@
+.seller-profile {
+  display: flex;
+  align-items: center;
+}
+
+.seller-profile > * {
+  margin-left: 1em;
+}
+
+.seller-profile > figure {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.seller-profile > .bio > .name {
+  font-weight: bold;
+  color: #adc867;
+}
+
+.seller-profile > .bio > .profession {
+  font-weight: bolder;
+  color: #6c7079;
+}

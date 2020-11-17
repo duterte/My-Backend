@@ -1,0 +1,146 @@
+/* */
+.header-top-wrapper {
+  background-color: var(--bg-color-header);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  height: 65px;
+  color: var(--color-header);
+  user-select: none;
+  font-size: 1rem;
+  font-family: 'Montserrat', serif;
+}
+
+.header-top span.logo {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  min-width: 89px;
+}
+
+.header-top span.logo a {
+  width: 50px;
+}
+
+.menu-area {
+  display: none;
+}
+
+.menu-area span {
+  border-top: 5px solid var(--bg-color-header);
+  border-bottom: 5px solid var(--bg-color-header);
+  background: var(--header-menu-color);
+  padding: 0.2em 0.5em;
+  height: 100%;
+  min-width: 89px;
+  transition-property: border, color, background-color;
+  transition-duration: 0.7s;
+  transition-timing-function: ease-out;
+}
+
+.menu-area > span:hover {
+  border-top: 5px solid orange;
+  border-bottom: 5px solid orange;
+  color: var(--theme-color);
+}
+
+.dropdown-menu-holder {
+  display: none;
+}
+
+.menu-area .dropdown-menu {
+  display: none;
+  list-style: none;
+  background-color: var(--bg-color-header);
+  color: var(--color-header);
+  top: 108%;
+  border-radius: 0 0 5px 5px;
+}
+
+.dropdown-menu-holder:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu > li {
+  border-bottom: 1px solid #238e2b;
+  padding: 0.5em 0;
+  min-width: 200px;
+  text-indent: 19px;
+  transition-property: background-color;
+  transition-duration: 0.7s;
+  transition-timing-function: ease-out;
+}
+
+.dropdown-menu > li:hover {
+  background-color: #35932f;
+  color: var(--bg-color-header);
+}
+
+.dropdown-menu > li:last-of-type {
+  border-bottom: none;
+  border-radius: 0 0 5px 5px;
+}
+
+.header-top .hamburger-menu {
+  font-size: 1.6em;
+}
+
+.header-top .mobile-menu {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin-right: 1em;
+}
+
+@media screen and (min-width: 662px) {
+  .header-top {
+    justify-content: flex-start;
+    font-size: 1.2rem;
+  }
+
+  .header-top span.logo {
+    flex: 0 0 auto;
+  }
+
+  .menu-area {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: flex-end;
+  }
+
+  .menu-area span {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+  }
+  .header-top .mobile-menu {
+    display: none;
+  }
+  .dropdown-menu-holder {
+    display: initial;
+  }
+}
+@media screen and (min-width: 915px) {
+  .header-top span.logo {
+    min-width: 240px;
+  }
+
+  .menu-area > span {
+    min-width: 200px;
+  }
+}
+
+@media screen and (min-width: 1518px) {
+  .header-top {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .header-top span.logo {
+    min-width: 400px;
+  }
+  .menu-area {
+    width: 999px;
+  }
+}

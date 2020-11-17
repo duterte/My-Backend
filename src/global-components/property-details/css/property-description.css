@@ -1,0 +1,14 @@
+.property-desc {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  overflow-y: hidden;
+}
+
+.property-desc > p {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  margin: 0 1em;
+  text-indent: 3em;
+  height: 100%;
+}

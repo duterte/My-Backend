@@ -1,0 +1,14 @@
+.featuredproperty > h1 {
+  margin: 2em 0;
+}
+
+.featuredproperty > .content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 2em;
+}
+
+.featuredproperty > .content > * {
+  margin-bottom: 2em;
+}

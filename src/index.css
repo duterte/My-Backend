@@ -1,0 +1,113 @@
+body {
+  --font-color-gray: #bac5d1;
+  --font-color-lightdark: #394246;
+  --bg-color-gray: #f3f7fb;
+  --bg-btn-blue: #03a9f4;
+  --bg-btn-red: #e11111;
+  --bg-color-header: #fff;
+  --color-header: #3f3f3f;
+  --theme-color: #35932f;
+  position: relative;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  background: #ffffff;
+  color: #2b2e35;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header,
+main,
+footer {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', 'Nunito', serif;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+pre {
+  font-family: monospace;
+}
+
+/* button preferences */
+
+button.page-button {
+  box-shadow: 0 0 5px #00000080;
+  border: none;
+  border-radius: 5px;
+  padding: 0.7em 2em;
+  font-weight: bold;
+  font-family: 'Nunito';
+  text-transform: uppercase;
+  cursor: pointer;
+  min-width: 105px;
+}
+
+button.page-button.primary {
+  background-color: var(--bg-btn-blue);
+  color: white;
+  outline: none;
+}
+
+button.page-button.secondary {
+  background-color: var(--bg-btn-red);
+  color: white;
+  outline: none;
+}
+
+button.page-button.disable {
+  background-color: var(--bg-color-gray);
+  color: var(--font-color-lightdark);
+}
+
+.dropdown-menu-holder {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  z-index: 11;
+}
+
+/* if dropdown is on the right choose this selector */
+.dropdown-menu.appear-right {
+  right: 0;
+}
+
+/* if dropdown is on the left choose this selector */
+.dropdown-menu.appear-left {
+  left: 0;
+}
+
+/* if dropdown is on the center choose this selector */
+.dropdown-menu.appear-center {
+  transform: translateX(-36%);
+}
+
+.no-select {
+  user-select: none;
+}

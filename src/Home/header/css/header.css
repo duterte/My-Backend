@@ -1,0 +1,16 @@
+#root header.homepage {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: #e8c5c9c4 url(../../../resource-images/mega-city.webp);
+  background-clip: content-box;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: local;
+  background-repeat: no-repeat;
+  height: 70vh;
+}
+
+header.homepage > .main {
+  display: grid;
+  align-items: center;
+}

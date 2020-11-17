@@ -1,0 +1,43 @@
+.info-snippets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border-top: 2px solid white;
+  color: #6c7079;
+}
+
+.info-snippets > * {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+}
+
+.info-snippets > .floorarea {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.info-snippets > .bathroom {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+.info-snippets > .bedroom {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.info-snippets > .garage {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.info-snippets > * > .icon {
+  justify-self: center;
+  align-self: center;
+  font-size: 2em;
+  color: #bac5d1;
+}
+
+.info-snippets > * > .context {
+  justify-self: left;
+  align-self: center;
+}
