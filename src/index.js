@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 // import * as serviceWorker from './serviceWorker';
 import './index.css';
-import Routes from './routes';
+import Routes from './routes.jsx';
 
 ReactDOM.render(
   <StrictMode>

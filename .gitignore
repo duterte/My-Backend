@@ -2,7 +2,8 @@
 
 /reale-estate
 /node_modules
-/public
+/build
+/build/
 /dist
 /images
 /credentials
